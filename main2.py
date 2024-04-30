@@ -9,14 +9,12 @@ import openpyxl
 service = Service(executable_path="chromedriver.exe")
 driver = webdriver.Chrome(service=service)
 
-driver.get("https://www.tokopedia.com/find/smartphone")
+driver.get("https://www.tokopedia.com/find/laptop-gaming")
 
 try:
-    WebDriverWait(driver, 10).until(
+    WebDriverWait(driver, 20).until(
         EC.presence_of_all_elements_located((By.CLASS_NAME, "css-ovjotx"))
     )
-
-    products = driver.find_elements(By.CLASS_NAME, "css-ovjotx")
 
     # Create a new Excel workbook and worksheet
     workbook = openpyxl.Workbook()
@@ -24,6 +22,16 @@ try:
 
     # Write the headers to the worksheet
     worksheet.append(["Product Name", "Price", "Rating"])
+
+    # Get current window height
+    window_height = driver.execute_script("return window.innerHeight;")
+    
+    # Scroll down half the height of the window, 10 times
+    for _ in range(10):
+        driver.execute_script(f"window.scrollBy(0, {window_height/2});")
+        time.sleep(5)  # Add a small pause between scrolls
+
+    products = driver.find_elements(By.CLASS_NAME, "css-ovjotx")
 
     for product in products:
         try:
@@ -45,6 +53,3 @@ finally:
 
 # Save the workbook to an Excel file
 workbook.save("output.xlsx")
-
-# Add a delay between requests
-time.sleep(5)
