@@ -9,47 +9,47 @@ import openpyxl
 service = Service(executable_path="chromedriver.exe")
 driver = webdriver.Chrome(service=service)
 
-driver.get("https://www.tokopedia.com/find/laptop-gaming")
+# Create a new Excel workbook and worksheet
+workbook = openpyxl.Workbook()
+worksheet = workbook.active
 
-try:
-    WebDriverWait(driver, 20).until(
-        EC.presence_of_all_elements_located((By.CLASS_NAME, "css-ovjotx"))
-    )
+# Write the headers to the worksheet
+worksheet.append(["Product Name", "Price", "Rating"])
 
-    # Create a new Excel workbook and worksheet
-    workbook = openpyxl.Workbook()
-    worksheet = workbook.active
+for i in range(10):
+    try:
+        driver.get(f"https://www.tokopedia.com/find/laptop-gaming?page={i+1}")
+        WebDriverWait(driver, 20).until(
+            EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".css-ovjotx"))
+        )
 
-    # Write the headers to the worksheet
-    worksheet.append(["Product Name", "Price", "Rating"])
+        # Get current window height
+        window_height = driver.execute_script("return window.innerHeight;")
+        
+        # Scroll down half the height of the window, 10 times
+        for _ in range(5):
+            driver.execute_script(f"window.scrollBy(0, {window_height/0.5});")
+            time.sleep(2)  # Add a small pause between scrolls
 
-    # Get current window height
-    window_height = driver.execute_script("return window.innerHeight;")
-    
-    # Scroll down half the height of the window, 10 times
-    for _ in range(10):
-        driver.execute_script(f"window.scrollBy(0, {window_height/2});")
-        time.sleep(5)  # Add a small pause between scrolls
+        products = driver.find_elements(By.CSS_SELECTOR, ".css-ovjotx")
 
-    products = driver.find_elements(By.CLASS_NAME, "css-ovjotx")
+        for product in products:
+            try:
+                nama = product.find_element(By.CSS_SELECTOR, ".prd_link-product-name.css-3um8ox").text
+                harga = product.find_element(By.CSS_SELECTOR, ".prd_link-product-price.css-h66vau").text
+                rating = product.find_element(By.CSS_SELECTOR, ".prd_rating-average-text.css-y301c6").text
 
-    for product in products:
-        try:
-            nama = product.find_element(By.CSS_SELECTOR, ".prd_link-product-name.css-3um8ox").text
-            harga = product.find_element(By.CSS_SELECTOR, ".prd_link-product-price.css-h66vau").text
-            rating = product.find_element(By.CSS_SELECTOR, ".prd_rating-average-text.css-y301c6").text
+                # Write the data to the worksheet
+                worksheet.append([nama, harga, rating])
 
-            # Write the data to the worksheet
-            worksheet.append([nama, harga, rating])
+            except Exception as e:
+                print(f"Error scraping product {product}: {e}")
 
-        except Exception as e:
-            print(f"Error scraping product {product}: {e}")
-
-except Exception as e:
-    print(f"Error waiting for elements: {e}")
-
-finally:
-    driver.quit()
+    except Exception as e:
+        print(f"Error waiting for elements: {e}")
 
 # Save the workbook to an Excel file
 workbook.save("output.xlsx")
+
+# Close the webdriver
+driver.quit()
