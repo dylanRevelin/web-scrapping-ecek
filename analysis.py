@@ -1,23 +1,24 @@
 import pandas as pd
 
+def preprocess_price(price):
+    # Remove non-numeric characters from the price string
+    return float(price.replace('Rp', '').replace('.', ''))
+
 def analyze_data(filename):
     # Read the data
     data = pd.read_excel(filename)
 
-    # 1. Exploratory Data Analysis (EDA)
-    data_info = data.info()
-    data_desc = data.describe()
+    # Preprocess 'Price' column
+    data['Price'] = data['Price'].apply(preprocess_price)
 
-    # 2. Clean 'Price' column
-    data['Price'] = data['Price'].str.replace('Rp', '').str.replace('.', '').astype(float)
+    # Sort data by price and rating
+    data_sorted_price = data.sort_values(by='Price')
 
-    # 3. Summary Statistics
+    # Calculate summary statistics
     mean_price = data['Price'].mean()
     median_price = data['Price'].median()
     mean_rating = data['Rating'].mean()
     median_rating = data['Rating'].median()
 
-    # 4. Data Visualization
-    # Add your data visualization code here if needed
 
-    return data_info, data_desc, mean_price, median_price, mean_rating, median_rating
+    return data_sorted_price, mean_price, median_price, mean_rating, median_rating

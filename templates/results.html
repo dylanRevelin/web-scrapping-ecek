@@ -6,32 +6,33 @@
     <title>Scraped Products</title>
 </head>
 <body>
-    <h1>Scraped Products</h1>
+    <h1>Top 10 Products with Lowest Prices</h1>
     <table border="1">
         <thead>
             <tr>
                 <th>Product Name</th>
                 <th>Price</th>
                 <th>Rating</th>
+                <th>Website</th>
             </tr>
         </thead>
         <tbody>
-            {% for index, row in data.iterrows() %}
+            {% for index, row in data.head(30).iterrows() %}
             <tr>
                 <td>{{ row['Product Name'] }}</td>
                 <td>{{ row['Price'] }}</td>
                 <td>{{ row['Rating'] }}</td>
+                <td>{{ row['Website'] }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
     <h2>Analysis:</h2>
-    <p>Data Information: {{ data_info }}</p>
-    <p>Data Description: {{ data_desc }}</p>
     <p>Mean Price: {{ mean_price }}</p>
     <p>Median Price: {{ median_price }}</p>
     <p>Mean Rating: {{ mean_rating }}</p>
     <p>Median Rating: {{ median_rating }}</p>
+
 </body>
 </html>
