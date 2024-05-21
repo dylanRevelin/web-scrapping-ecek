@@ -3,36 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scraped Products</title>
+    <title>Scrape Results</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+        .container {
+            max-width: 900px;
+            background: white;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-    <h1>Top 10 Products with Lowest Prices</h1>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Product Name</th>
-                <th>Price</th>
-                <th>Rating</th>
-                <th>Website</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for index, row in data.head(30).iterrows() %}
-            <tr>
-                <td>{{ row['Product Name'] }}</td>
-                <td>{{ row['Price'] }}</td>
-                <td>{{ row['Rating'] }}</td>
-                <td>{{ row['Website'] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="container">
+        <h1 class="text-center mb-4">Scrape Results for {{ product_name }}</h1>
+        <h2 class="mt-4">Sorted by Price</h2>
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>Website</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                <tr>
+                    <td>{{ item['Website'] }}</td>
+                    <td>{{ item['Product Name'] }}</td>
+                    <td>Rp {{ item['Price'] | format_price }}</td> <!-- Format price here -->
+                    <td>{{ item['Rating'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h2 class="mt-4">Statistics</h2>
+        <p>Mean Price: Rp {{ mean_price | format_price }}</p> <!-- Format mean price here -->
+        <p>Median Price: Rp {{ median_price | format_price }}</p> <!-- Format median price here -->
+        <p>Mean Rating: {{ mean_rating }}</p>
+        <p>Median Rating: {{ median_rating }}</p>
 
-    <h2>Analysis:</h2>
-    <p>Mean Price: {{ mean_price }}</p>
-    <p>Median Price: {{ median_price }}</p>
-    <p>Mean Rating: {{ mean_rating }}</p>
-    <p>Median Rating: {{ median_rating }}</p>
-
+        <!-- Download link for Excel file -->
+        <a href="{{ url_for('download_results') }}" class="btn btn-primary">Download Results</a>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

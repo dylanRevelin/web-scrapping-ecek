@@ -20,5 +20,4 @@ def analyze_data(filename):
     mean_rating = data['Rating'].mean()
     median_rating = data['Rating'].median()
 
-
     return data_sorted_price, mean_price, median_price, mean_rating, median_rating

@@ -52,7 +52,7 @@ def scrape_bukalapak(driver, product_name, pages, worksheet):
                     nama = product.find_element(By.CLASS_NAME, "bl-text").text
                     harga = product.find_element(By.CLASS_NAME, "bl-product-card-new__price").text
                     rating_text = product.find_element(By.CLASS_NAME, "bl-product-card-new__ratings").text
-                    rating = rating_text[0] if rating_text[0] != "T" else "0"
+                    rating = rating_text.split()[0] if rating_text[0] != "T" else "0"
                     worksheet.append(["Bukalapak", nama, harga, rating])
                 except Exception as e:
                     print(f"Error scraping product {product}: {e}")
