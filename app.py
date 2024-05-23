@@ -21,7 +21,7 @@ def scrape():
         product_name = request.form['product_name']
         pages = int(request.form['pages'])
         filename = scrape_products(product_name, pages)
-        data_sorted_price, mean_price, median_price, mean_rating, median_rating = analyze_data(filename)
+        data_sorted_price, mean_price, median_price, mean_rating, median_rating, highest_price, lowest_price = analyze_data(filename)
         
         # Store results and product name in session
         session['product_name'] = product_name
@@ -30,6 +30,8 @@ def scrape():
         session['median_price'] = median_price
         session['mean_rating'] = mean_rating
         session['median_rating'] = median_rating
+        session['highest_price'] = highest_price
+        session['lowest_price'] = lowest_price
         
         return redirect(url_for('results', filename=filename))
 
@@ -42,14 +44,18 @@ def results():
     median_price = session.get('median_price')
     mean_rating = session.get('mean_rating')
     median_rating = session.get('median_rating')
+    highest_price = session.get('highest_price')
+    lowest_price = session.get('lowest_price')
     
     return render_template('results.html', 
                            product_name=product_name,
-                           data=data_sorted_price, 
+                           data=data_sorted_price,
                            mean_price=mean_price,
                            median_price=median_price,
                            mean_rating=mean_rating,
-                           median_rating=median_rating)
+                           median_rating=median_rating,
+                           highest_price=highest_price,
+                           lowest_price=lowest_price)
 
 @app.route('/download-results')
 def download_results():
@@ -59,6 +65,8 @@ def download_results():
     median_price = session.get('median_price')
     mean_rating = session.get('mean_rating')
     median_rating = session.get('median_rating')
+    highest_price = session.get('highest_price')
+    lowest_price = session.get('lowest_price')
 
     # Create a DataFrame from the data
     df = pd.DataFrame(data_sorted_price)
@@ -78,6 +86,10 @@ def download_results():
         worksheet.write(len(df) + 4, 1, mean_rating)
         worksheet.write(len(df) + 5, 0, 'Median Rating:')
         worksheet.write(len(df) + 5, 1, median_rating)
+        worksheet.write(len(df) + 6, 0, 'Highest Price:')
+        worksheet.write(len(df) + 6, 1, highest_price)
+        worksheet.write(len(df) + 7, 0, 'Lowest Price:')
+        worksheet.write(len(df) + 7, 1, lowest_price)
     excel_data.seek(0)
 
     # Create a response object
@@ -91,5 +103,3 @@ def download_results():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-#testcommit
