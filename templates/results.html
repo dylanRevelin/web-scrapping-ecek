@@ -104,6 +104,22 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="card statistic-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Highest Price</h5>
+                        <p class="card-text">{{ highest_price | format_price }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card statistic-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Lowest Price</h5>
+                        <p class="card-text">{{ lowest_price | format_price }}</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Download link for Excel file -->
