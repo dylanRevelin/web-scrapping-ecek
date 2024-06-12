@@ -6,7 +6,6 @@ from selenium.webdriver.support import expected_conditions as EC
 import random
 import time
 import openpyxl
-import os
 
 def scrape_tokopedia(driver, product_name, pages, worksheet):
     for i in range(pages):
@@ -138,14 +137,6 @@ def scrape_lazada(driver, product_name, pages, worksheet):
 def scrape_products(product_name, pages=1):
     # Update this path to the actual location of chromedriver.exe
     chromedriver_path = "C:/Users/VEILIND/OneDrive/Dokumen/MIKRO_SEM 4/Artificial Intelligence/webscrapping_v2/web-scrapping-ecek/chromedriver.exe"
-    
-    # # Debugging: Check if the chromedriver file exists at the specified path
-    # print("Checking if ChromeDriver exists at:", chromedriver_path)
-    # if not os.path.isfile(chromedriver_path):
-    #     raise FileNotFoundError(f"ChromeDriver not found at {chromedriver_path}")
-
-    # # Debugging: Print the current working directory
-    # print("Current Directory:", os.getcwd())
 
     # Setting up the ChromeDriver service
     service = Service(executable_path=chromedriver_path)
