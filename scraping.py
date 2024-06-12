@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import random
 import time
 import openpyxl
+import os
 
 def scrape_tokopedia(driver, product_name, pages, worksheet):
     for i in range(pages):
@@ -111,8 +112,43 @@ def scrape_lazada(driver, product_name, pages, worksheet):
         except Exception as e:
             print(f"Error waiting for elements on Lazada: {e}")
 
+# def scrape_products(product_name, pages=1):
+#     service = Service(executable_path="chromedriver.exe")
+
+#     options = webdriver.ChromeOptions()
+#     driver = webdriver.Chrome(service=service, options=options)
+
+#     workbook = openpyxl.Workbook()
+#     worksheet = workbook.active
+
+#     worksheet.append(["Website", "Product Name", "Price", "Rating"])
+
+#     try:
+#         scrape_tokopedia(driver, product_name, pages, worksheet)
+#         scrape_bukalapak(driver, product_name, pages, worksheet)
+#         # scrape_blibli(driver, product_name, pages, worksheet)
+#         scrape_lazada(driver, product_name, pages, worksheet)
+#     finally:
+#         filename = f"{product_name}_output.xlsx"
+#         workbook.save(filename)
+#         driver.quit()
+        
+#         return filename
+
 def scrape_products(product_name, pages=1):
-    service = Service(executable_path="chromedriver.exe")
+    # Update this path to the actual location of chromedriver.exe
+    chromedriver_path = "C:/Users/VEILIND/OneDrive/Dokumen/MIKRO_SEM 4/Artificial Intelligence/webscrapping_v2/web-scrapping-ecek/chromedriver.exe"
+    
+    # # Debugging: Check if the chromedriver file exists at the specified path
+    # print("Checking if ChromeDriver exists at:", chromedriver_path)
+    # if not os.path.isfile(chromedriver_path):
+    #     raise FileNotFoundError(f"ChromeDriver not found at {chromedriver_path}")
+
+    # # Debugging: Print the current working directory
+    # print("Current Directory:", os.getcwd())
+
+    # Setting up the ChromeDriver service
+    service = Service(executable_path=chromedriver_path)
 
     options = webdriver.ChromeOptions()
     driver = webdriver.Chrome(service=service, options=options)
@@ -126,7 +162,7 @@ def scrape_products(product_name, pages=1):
         scrape_tokopedia(driver, product_name, pages, worksheet)
         scrape_bukalapak(driver, product_name, pages, worksheet)
         # scrape_blibli(driver, product_name, pages, worksheet)
-        scrape_lazada(driver, product_name, pages, worksheet)
+        # scrape_lazada(driver, product_name, pages, worksheet)
     finally:
         filename = f"{product_name}_output.xlsx"
         workbook.save(filename)
