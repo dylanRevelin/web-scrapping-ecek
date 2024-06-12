@@ -111,29 +111,6 @@ def scrape_lazada(driver, product_name, pages, worksheet):
         except Exception as e:
             print(f"Error waiting for elements on Lazada: {e}")
 
-# def scrape_products(product_name, pages=1):
-#     service = Service(executable_path="chromedriver.exe")
-
-#     options = webdriver.ChromeOptions()
-#     driver = webdriver.Chrome(service=service, options=options)
-
-#     workbook = openpyxl.Workbook()
-#     worksheet = workbook.active
-
-#     worksheet.append(["Website", "Product Name", "Price", "Rating"])
-
-#     try:
-#         scrape_tokopedia(driver, product_name, pages, worksheet)
-#         scrape_bukalapak(driver, product_name, pages, worksheet)
-#         # scrape_blibli(driver, product_name, pages, worksheet)
-#         scrape_lazada(driver, product_name, pages, worksheet)
-#     finally:
-#         filename = f"{product_name}_output.xlsx"
-#         workbook.save(filename)
-#         driver.quit()
-        
-#         return filename
-
 def scrape_products(product_name, pages=1):
     # Update this path to the actual location of chromedriver.exe
     chromedriver_path = "C:/Users/VEILIND/OneDrive/Dokumen/MIKRO_SEM 4/Artificial Intelligence/webscrapping_v2/web-scrapping-ecek/chromedriver.exe"
