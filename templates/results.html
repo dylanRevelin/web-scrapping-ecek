@@ -73,7 +73,6 @@
                     <div class="card-body">
                         <h5 class="card-title">Mean Price</h5>
                         <p class="card-text">{{ mean_price | format_price }}</p>
-                        <span class="badge badge-primary">Recommended</span>
                     </div>
                 </div>
             </div>
@@ -100,7 +99,22 @@
                     <div class="card-body">
                         <h5 class="card-title">Median Rating</h5>
                         <p class="card-text">{{ median_rating }}</p>
-                        <span class="badge badge-primary">Recommended</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card statistic-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Highest Price</h5>
+                        <p class="card-text">{{ highest_price | format_price }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card statistic-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Lowest Price</h5>
+                        <p class="card-text">{{ lowest_price | format_price }}</p>
                     </div>
                 </div>
             </div>
