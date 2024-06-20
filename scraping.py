@@ -12,7 +12,7 @@ def scrape_tokopedia(driver, product_name, pages, worksheet):
         try:
             driver.get(f"https://www.tokopedia.com/find/{product_name}?page={i+1}")
             WebDriverWait(driver, 20).until(
-                EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".css-ovjotx"))
+                EC.presence_of_all_elements_located((By.CLASS_NAME, "css-15vayma"))
             )
 
             window_height = driver.execute_script("return window.innerHeight;")
@@ -20,13 +20,15 @@ def scrape_tokopedia(driver, product_name, pages, worksheet):
                 driver.execute_script(f"window.scrollBy(0, {window_height/0.5});")
                 time.sleep(2)
 
-            products = driver.find_elements(By.CSS_SELECTOR, ".css-ovjotx")
+            products = driver.find_elements(By.CLASS_NAME, "css-15vayma")
+            tes = 0
 
             for product in products:
+                tes +=1
                 try:
-                    nama = product.find_element(By.CSS_SELECTOR, ".prd_link-product-name.css-3um8ox").text
-                    harga = product.find_element(By.CSS_SELECTOR, ".prd_link-product-price.css-h66vau").text
-                    rating = product.find_element(By.CSS_SELECTOR, ".prd_rating-average-text.css-y301c6").text
+                    nama = product.find_element(By.XPATH, f"/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[{tes}]/a[1]/div[1]/div[2]/div[1]").text
+                    harga = product.find_element(By.XPATH, f"/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[{tes}]/a[1]/div[1]/div[2]/div[2]/div[1]").text
+                    rating = product.find_element(By.XPATH, f"/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[{tes}]/a[1]/div[1]/div[2]/div[3]/div[1]/span[1]").text
                     worksheet.append(["Tokopedia", nama, harga, rating])
                 except Exception as e:
                     print(f"Error scraping product {product}: {e}")
@@ -89,27 +91,42 @@ def scrape_blibli(driver, product_name, pages, worksheet):
 def scrape_lazada(driver, product_name, pages, worksheet):
     for i in range(pages):
         try:
-            driver.get(f"https://www.lazada.com.ph/catalog/?q={product_name}&page={i+1}")
+            # Navigate to the Lazada search results page
+            driver.get(f"https://www.lazada.co.id/tag/{product_name}/?catalog_redirect_tag=true&page={i+1}&q={product_name}&spm=a2o4j.home-id.search.d_go")
+            
+            # Random delay to mimic human behavior
+            time.sleep(random.uniform(2, 5))
+            
+            # Wait for the products to load
             WebDriverWait(driver, 20).until(
                 EC.presence_of_all_elements_located((By.CLASS_NAME, "Bm3ON"))
             )
 
+            # Find all products on the page
             products = driver.find_elements(By.CLASS_NAME, "Bm3ON")
 
             for product in products:
                 try:
+                    # Extract product details
                     div_rfadt = product.find_element(By.CLASS_NAME, "RfADt")
                     anchor_element = div_rfadt.find_element(By.TAG_NAME, "a")
                     name = anchor_element.text.strip()
                     price = product.find_element(By.CLASS_NAME, "ooOx5").text
+                    
+                    # Extract rating details
                     rating_element = product.find_element(By.CLASS_NAME, "mdmmT._32vUv")
-                    rating_stars = rating_element.find_elements(By.CLASS_NAME, "_9-ogB.Dy1nx")  # Count filled star icons
+                    rating_stars = rating_element.find_elements(By.CLASS_NAME, "_9-ogB.Dy1nx")
                     rating = len(rating_stars)
+                    
+                    # Append data to worksheet
                     worksheet.append(["Lazada", name, price, rating])
                 except Exception as e:
                     print(f"Error scraping product {product}: {e}")
         except Exception as e:
             print(f"Error waiting for elements on Lazada: {e}")
+            
+        # Additional random delay to mimic human browsing
+        time.sleep(random.uniform(2, 5))
 
 def scrape_products(product_name, pages=1):
     service = Service(executable_path="chromedriver.exe")
@@ -124,9 +141,9 @@ def scrape_products(product_name, pages=1):
 
     try:
         scrape_tokopedia(driver, product_name, pages, worksheet)
-        scrape_bukalapak(driver, product_name, pages, worksheet)
+        #scrape_bukalapak(driver, product_name, pages, worksheet)
         # scrape_blibli(driver, product_name, pages, worksheet)
-        scrape_lazada(driver, product_name, pages, worksheet)
+        #scrape_lazada(driver, product_name, pages, worksheet)
     finally:
         filename = f"{product_name}_output.xlsx"
         workbook.save(filename)
