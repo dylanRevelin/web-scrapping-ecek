@@ -29,7 +29,12 @@ def scrape_tokopedia(driver, product_name, pages, worksheet):
                 try:
                     nama = product.find_element(By.XPATH, f"/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[{tes}]/a[1]/div[1]/div[2]/div[1]").text
                     harga = product.find_element(By.XPATH, f"/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[{tes}]/a[1]/div[1]/div[2]/div[2]/div[1]").text
-                    rating = product.find_element(By.XPATH, f"/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[{tes}]/a[1]/div[1]/div[2]/div[3]/div[1]/span[1]").text
+
+                    try : 
+                        rating = product.find_element(By.XPATH, f"/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[{tes}]/a[1]/div[1]/div[2]/div[3]/div[1]/span[1]").text
+                    except NoSuchElementException : 
+                        rating = 0
+
                     worksheet.append(["Tokopedia", nama, harga, rating])
                 except Exception as e:
                     print(f"Error scraping product {product}: {e}")
