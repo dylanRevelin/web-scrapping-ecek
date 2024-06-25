@@ -73,7 +73,7 @@ def scrape_bukalapak(driver, product_name, pages, worksheet):
                     except NoSuchElementException : 
                         rating = 0
 
-                    worksheet.append(["Bukalapak", nama, harga, rating])
+                    worksheet.append(["Bukalapak", nama, harga, float(rating)])
                 except Exception as e:
                     print(f"Error scraping product {product}: {e}")
         except Exception as e:
@@ -102,7 +102,7 @@ def scrape_lazada(driver, product_name, pages, worksheet):
                     price = product.find_element(By.CLASS_NAME, "ooOxS").text
                     rating_stars = product.find_elements(By.CLASS_NAME, "Dy1nx")  # Count filled star icons
                     rating = len(rating_stars)
-                    worksheet.append(["Lazada", name, price, rating])
+                    worksheet.append(["Lazada", name, price, float(rating)])
                 except Exception as e:
                     print(f"Error scraping product {product}: {e}")
         except Exception as e:
