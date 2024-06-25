@@ -23,7 +23,7 @@ def scrape():
         filename = scrape_products(product_name, pages)
         data_sorted_price, mean_price, median_price, mean_rating, median_rating, highest_price, lowest_price = analyze_data(filename)
         
-        data_sorted_price = data_sorted_price.head(100)
+        data_sorted_price = data_sorted_price.head(80)
 
         # Store results and product name in session
         session['product_name'] = product_name
