@@ -73,25 +73,31 @@ def download_results():
     # Create a DataFrame from the data
     df = pd.DataFrame(data_sorted_price)
 
+    df['Price'] = df['Price'].apply(lambda x: f"Rp {x:,.0f}")
+
+    df = df[['Product Name', 'Rating', 'Website', 'Price']]
+
     # Create an in-memory Excel file
     excel_data = BytesIO()
     with pd.ExcelWriter(excel_data, engine='xlsxwriter') as writer:
         df.to_excel(writer, index=False, sheet_name='Results')
         workbook = writer.book
         worksheet = writer.sheets['Results']
-        # Optionally, add mean and median statistics to the Excel file
+
+        # Optionally, add mean and median statistics to the Excel file with "Rp" prefix
         worksheet.write(len(df) + 2, 0, 'Mean Price:')
-        worksheet.write(len(df) + 2, 1, mean_price)
+        worksheet.write(len(df) + 2, 1, f"Rp {mean_price:,.0f}")
         worksheet.write(len(df) + 3, 0, 'Median Price:')
-        worksheet.write(len(df) + 3, 1, median_price)
+        worksheet.write(len(df) + 3, 1, f"Rp {median_price:,.0f}")
         worksheet.write(len(df) + 4, 0, 'Mean Rating:')
-        worksheet.write(len(df) + 4, 1, mean_rating)
+        worksheet.write(len(df) + 4, 1, f"{mean_rating:.2f}")
         worksheet.write(len(df) + 5, 0, 'Median Rating:')
         worksheet.write(len(df) + 5, 1, median_rating)
         worksheet.write(len(df) + 6, 0, 'Highest Price:')
-        worksheet.write(len(df) + 6, 1, highest_price)
+        worksheet.write(len(df) + 6, 1, f"Rp {highest_price:,.0f}")
         worksheet.write(len(df) + 7, 0, 'Lowest Price:')
-        worksheet.write(len(df) + 7, 1, lowest_price)
+        worksheet.write(len(df) + 7, 1, f"Rp {lowest_price:,.0f}")
+
     excel_data.seek(0)
 
     # Create a response object
@@ -102,6 +108,7 @@ def download_results():
     response.headers['Content-type'] = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
 
     return response
+
 
 if __name__ == "__main__":
     app.run(debug=True)
