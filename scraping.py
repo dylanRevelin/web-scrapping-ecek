@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
+import random
 import time
 import openpyxl
 
@@ -31,7 +32,7 @@ def scrape_tokopedia(driver, product_name, pages, worksheet):
 
                     try : 
                         rating = product.find_element(By.XPATH, f"/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[{tes}]/a[1]/div[1]/div[2]/div[3]/div[1]/span[1]").text
-                        rating = int(rating)
+                        rating = float(rating)
                         if isinstance(rating,(int,float)):
                             pass
                         else:
@@ -101,14 +102,14 @@ def scrape_lazada(driver, product_name, pages, worksheet):
                     price = product.find_element(By.CLASS_NAME, "ooOxS").text
                     rating_stars = product.find_elements(By.CLASS_NAME, "Dy1nx")  # Count filled star icons
                     rating = len(rating_stars)
-                    worksheet.append(["Lazada", name, price, float(rating)])
+                    worksheet.append(["Lazada", name, price, rating])
                 except Exception as e:
                     print(f"Error scraping product {product}: {e}")
         except Exception as e:
             print(f"Error waiting for elements on Lazada: {e}")
 
 def scrape_products(product_name, pages=1):
-    service = Service(executable_path="chromedriver.exe")
+    service = Service(executable_path="C:/Users/VEILIND/OneDrive/Dokumen/MIKRO_SEM 4/Artificial Intelligence/webscrapping_v2/web-scrapping-ecek/chromedriver.exe")
     driver = webdriver.Chrome(service=service)
 
     workbook = openpyxl.Workbook()
