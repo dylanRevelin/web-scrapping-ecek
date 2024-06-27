@@ -117,3 +117,25 @@ Fungsi: Pustaka untuk menulis file Excel dengan format yang lebih kompleks. Digu
 
 Instalasi: pip install XlsxWriter
 
+Untuk menjalankan program ini, kita juga perlu meng-install driver Chrome yang sesuai dengan versi browser Chrome yang kita gunakan.
+
+Link untuk menginstall Chromedriver : https://googlechromelabs.github.io/chrome-for-testing/#stable
+
+Note : Pilih bagian Stable lalu install sesuai sistem operasi yang diinginkan
+
+### 6. Referensi Pendukung
+
+**1. Website Dokumentasi**
+- https://azcv.readthedocs.io/en/latest/
+- https://github.com/SeleniumHQ/seleniumhq.github.io
+
+**2. Jurnal**
+Khder, M. A. (2021). Web scraping or web crawling: State of art, techniques, approaches and application. International Journal of Advances in Soft Computing & Its Applications, 13(3). http://www.i-csrs.org/Volumes/ijasca/2021.3.11.pdf
+
+Rinanda, P. D. (2024, January). Implementation of PNN, ANN And K-NN Algorithms on Indonesian Marketplace Reviews on Google Play Store. In 2024 ASU International Conference in Emerging Technologies for Sustainability and Intelligent Systems (ICETSIS) (pp. 1070-1074). IEEE. http://repository.uin-suska.ac.id/78865/1/PALING%20FIX%20LAPORAN%20TA%20PUJI%20.pdf
+
+RITA, A. (2020). ANALISIS SENTIMEN MENGGUNAKAN ALGORITMA NAÏVE BAYES TERHADAP KOMENTAR APLIKASI TOKOPEDIA (Doctoral dissertation, Nusa Putra University). http://repository.nusaputra.ac.id/id/eprint/93/1/RITA%20APRIANI%20_Si20.pdf
+
+**3. Youtube**
+- https://youtu.be/NB8OceGZGjA?si=jyCwOVTODrYDR0fR
+- https://youtu.be/RKeJPXrbT8w?si=WpQ7OPvtuYbkwhBI
