@@ -46,3 +46,43 @@ Aplikasi yang kami kembangkan adalah sebuah aplikasi web scraping yang bertujuan
     Hasil analisis ditampilkan di halaman web dalam bentuk tabel. Pengguna juga dapat mengunduh hasil analisis dalam format Excel untuk penggunaan lebih lanjut.
 
 Dengan aplikasi ini, pengguna dapat dengan mudah mengumpulkan dan menganalisis data produk dari berbagai sumber, membantu mereka dalam membuat keputusan pembelian yang lebih baik dan memahami tren pasar.
+
+### 4. Pembagian Tugas
+
+#### 1. Michael - 221110659 : Penanggung Jawab Scraping dari Lazada
+
+Tugas Utama: Melakukan scraping data produk dari situs e-commerce Lazada.
+
+Detail Pekerjaan:
+- Mengembangkan skrip scraping yang mampu mengumpulkan informasi produk seperti nama, harga, rating, dan website asal dari Lazada.
+- Menjaga agar skrip scraping tetap up-to-date dengan perubahan struktur situs web Lazada.
+- Menguji dan memastikan bahwa data yang di-scrape akurat dan lengkap.
+  
+#### 2. Dylan Revelin - 221110096 : Penanggung Jawab Scraping dari Tokopedia dan Bukalapakserta Pengembangan BackEnd
+
+Tugas Utama: Melakukan scraping data produk dari situs e-commerce Tokopedia dan Bukalapak serta mengembangkan backend aplikasi.
+
+Detail Pekerjaan:
+- Mengembangkan skrip scraping untuk mengumpulkan informasi produk dari Tokopedia dan Bukalapak.
+- Mengelola backend aplikasi menggunakan Flask, termasuk mengatur rute dan fungsi utama di dalam app.py.
+- Mengintegrasikan hasil scraping dengan backend untuk memastikan data dapat diakses dan diolah dengan mudah.
+  
+#### 3. Veilind Maynius - 221111085 : Penanggung Jawab Analisis Data dan Pengembangan Tampilan
+
+Tugas Utama: Menganalisis data yang telah di-scrape dan mengembangkan tampilan antarmuka pengguna.
+
+Detail Pekerjaan:
+- Menulis modul analysis.py untuk menghitung statistik penting seperti harga rata-rata, median harga, rata-rata rating, dan median rating dari data yang di-scrape.
+- Mengembangkan template HTML menggunakan Jinja2 dan Bootstrap untuk menampilkan hasil scraping dan analisis data dengan cara yang menarik dan mudah dipahami.
+- Memastikan antarmuka pengguna responsif dan user-friendly
+
+#### 4. Vincent - 221110485 : Penanggung Jawab Pengujian dan Analisa Bug serta Data
+
+Tugas Utama: Menjalankan kode, mengidentifikasi, dan memperbaiki bug, serta melakukan analisis data hasil scraping.
+
+Detail Pekerjaan:
+- Menjalankan keseluruhan kode aplikasi untuk memastikan semuanya berjalan dengan lancar.
+- Mengidentifikasi dan memperbaiki bug yang ditemukan selama pengujian.
+- Melakukan analisis mendalam terhadap data yang dihasilkan, memastikan data tersebut siap digunakan untuk tujuan lebih lanjut, seperti pelaporan atau penelitian.
+
+
