@@ -85,4 +85,35 @@ Detail Pekerjaan:
 - Mengidentifikasi dan memperbaiki bug yang ditemukan selama pengujian.
 - Melakukan analisis mendalam terhadap data yang dihasilkan, memastikan data tersebut siap digunakan untuk tujuan lebih lanjut, seperti pelaporan atau penelitian.
 
+### 5. Library yang perlu diinstall
+
+1. Flask
+
+Fungsi: Framework web mikro yang digunakan untuk mengembangkan aplikasi web. Flask memudahkan dalam pengelolaan rute, render template, dan menangani permintaan HTTP.
+
+Instalasi: pip install Flask
+
+2. Selenium
+
+Fungsi: Pustaka yang digunakan untuk otomatisasi browser. Selenium digunakan untuk melakukan scraping data dari situs web dengan mensimulasikan interaksi pengguna.
+
+Instalasi: pip install selenium
+
+3. Openpyxl
+
+Fungsi: Pustaka untuk membaca dan menulis file Excel (xlsx). Digunakan untuk menyimpan hasil scraping ke dalam file Excel.
+
+Instalasi: pip install openpyxl
+
+4. Pandas
+
+Fungsi: Pustaka untuk manipulasi dan analisis data. Digunakan untuk memproses dan menganalisis data yang telah di-scrape.
+
+Instalasi: pip install pandas
+
+5. Xlsxwriter
+
+Fungsi: Pustaka untuk menulis file Excel dengan format yang lebih kompleks. Digunakan untuk menambahkan statistik ke dalam file Excel.
+
+Instalasi: pip install XlsxWriter
 
