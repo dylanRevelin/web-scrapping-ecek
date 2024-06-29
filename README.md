@@ -1,6 +1,6 @@
 # Kelompok 6
 
-Penjelasan terkait program yang dikembangkan, cara kerja program, pembagian tugas per masing-masing anggota, library yang perlu diinstal, serta dokumen referensi
+Penjelasan terkait program yang dikembangkan, cara kerja program, pembagian tugas per masing-masing anggota, library yang perlu diinstal, video presentasi serta dokumen referensi
 
 ### 1. Deskripsi Program
 
@@ -123,7 +123,11 @@ Link untuk menginstall Chromedriver : https://googlechromelabs.github.io/chrome-
 
 Note : Pilih bagian Stable lalu install sesuai sistem operasi yang diinginkan
 
-### 6. Referensi Pendukung
+### 6. Video Presentasi 
+https://mikroskilacid-my.sharepoint.com/:v:/g/personal/221110659_students_mikroskil_ac_id/EYqdTYHIabFKrOAYQQH8XDgBjKBLqyVGu06MPH2HaO1Gtw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=61EuXU
+
+
+### 7. Referensi Pendukung
 
 **1. Website Dokumentasi**
 - https://azcv.readthedocs.io/en/latest/
